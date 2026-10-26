@@ -42,7 +42,11 @@ def safe_relative_path(root: Path, raw_path: Any, label: str, errors: list[str])
     if logical.is_absolute() or ".." in logical.parts or logical == PurePosixPath("."):
         errors.append(f"{label}: path must stay inside the manifest directory")
         return None
-    resolved = (root / Path(*logical.parts)).resolve()
+    try:
+        resolved = (root / Path(*logical.parts)).resolve()
+    except (OSError, ValueError, UnicodeError):
+        errors.append(f"{label}: path cannot be resolved safely")
+        return None
     try:
         resolved.relative_to(root)
     except ValueError:

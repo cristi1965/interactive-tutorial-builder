@@ -200,6 +200,18 @@ class EvidenceVerifierTest(unittest.TestCase):
                 self.assertEqual("fail", result["status"])
                 self.assertTrue(any("relative path" in error or "inside" in error for error in result["errors"]))
 
+    def test_rejects_unresolvable_paths_without_traceback(self):
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = self.build_fixture(Path(directory))
+            for bad_path in ("dist/\0file", "dist/\ud800file"):
+                payload = json.loads(manifest.read_text(encoding="utf-8"))
+                payload["candidate"]["artifacts"][0]["path"] = bad_path
+                candidate = Path(directory) / "bad-path.json"
+                candidate.write_text(json.dumps(payload), encoding="utf-8")
+                result = MODULE.verify_manifest(candidate)
+                self.assertEqual("fail", result["status"])
+                self.assertTrue(any("cannot be resolved safely" in error for error in result["errors"]))
+
 
 if __name__ == "__main__":
     unittest.main()

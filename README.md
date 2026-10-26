@@ -31,10 +31,10 @@
 python3 "${CODEX_HOME:-$HOME/.codex}/skills/.system/skill-installer/scripts/install-skill-from-github.py" \
   --repo cristi1965/interactive-tutorial-builder \
   --path skills/interactive-tutorial-builder \
-  --ref v0.1.0
+  --ref v0.1.1
 ```
 
-试用主分支最新版时，把 `--ref v0.1.0` 改成 `--ref main`。安装完成后的下一轮对话即可使用新 Skill。
+试用主分支最新版时，把 `--ref v0.1.1` 改成 `--ref main`。安装完成后的下一轮对话即可使用新 Skill。
 
 安装器不会覆盖已存在的目录。升级时先把原来的 `${CODEX_HOME:-$HOME/.codex}/skills/interactive-tutorial-builder` 移走或删除，再安装目标版本。
 
@@ -86,7 +86,7 @@ CI 使用 Python 3.11。Skill 与证据校验器没有第三方运行依赖；�
 
 ## 版本
 
-当前版本为 `v0.1.0` 公共预览。触发描述、学习合同或证据语义的不兼容修改使用 major 版本；新增可选能力使用 minor；文档和校验器兼容修正使用 patch。
+当前版本为 `v0.1.1` 公共预览。触发描述、学习合同或证据语义的不兼容修改使用 major 版本；新增可选能力使用 minor；文档和校验器兼容修正使用 patch。
 
 ## License
 
