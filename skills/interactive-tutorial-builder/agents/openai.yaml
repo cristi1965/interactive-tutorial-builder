@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interactive Tutorial Builder"
+  short_description: "Build evidence-backed interactive technical tutorials"
+  default_prompt: "Use $interactive-tutorial-builder to turn this technical material into a coherent, runnable learning path."
